@@ -175,6 +175,10 @@ MonoBehaviour:
   - {fileID: 1547101272288468, guid: eb9ed4a5b8a1d554aa34924ac6cfe410, type: 2}
   - {fileID: 1108319281873066, guid: a09f885a83985e644a7a6b17c57ad9e1, type: 2}
   - {fileID: 1427727475921586, guid: 36c3d8a65a7121d488d313f78d129969, type: 2}
+  rooms: []
+  spawnedBoss: 0
+  boss: {fileID: 1576496640214538, guid: e9e79c14d1830e44d98162c72230040a, type: 2}
+  waitTime: 2
 --- !u!114 &342733314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,10 +310,6 @@ Prefab:
     - target: {fileID: 4457365596022286, guid: 670924f2f3b8727478b6d987447a9ea3, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1538341453925878, guid: 670924f2f3b8727478b6d987447a9ea3, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 670924f2f3b8727478b6d987447a9ea3, type: 2}

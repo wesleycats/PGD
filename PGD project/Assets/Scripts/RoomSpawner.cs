@@ -10,15 +10,15 @@ public class RoomSpawner : MonoBehaviour {
 	// R --> right
 	// L --> left
 
-	private RoomTemplates templates;
+	[SerializeField] private RoomTemplates templates;
 	private int rand;
 	[SerializeField] private bool spawned = false;
 
 	void Start()
 	{
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-		//Log();
-		Invoke("Spawn", 1f);
+		Log();
+		Invoke("Spawn", 0.1f);
 	}
 
 	void Spawn()
