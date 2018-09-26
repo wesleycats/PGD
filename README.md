@@ -6,21 +6,21 @@ This project is my first attempt to make a procedurally​ ​generated​ ​du
 ## Features
 Wanneer je een specifiek onderdeel wilt uitlichten kun je dat in deze sectie benoemen.
 
-- [Awesome Algoritme](link)
-- [Specifieke Mechanic](link)
-- [Iets unieks waar je trots op bent binnen de project](link)
+- Geprobeerd zo generiek mogelijk te programmeren [RoomSpawner](https://github.com/wesleycats/PGD/blob/master/PGD%20project/Assets/Scripts/RoomSpawner.cs)
 
 ## Software Anaylse 
-Welke software heb je voor deze proefopdracht onderzocht? En waarom heb je uiteindelijk gekozen voor de gekozen Software. Benoem hier specifieke argumenten.
+Omdat procedural generation mogelijk is in de meeste bekende engines, maakt het niet echt uit waarin ik te werk zou gaan. Daartentegen zou het wel makkelijk zijn om het in Unity te doen, al was ik met tiles aan de slag gegaan. Ik had voor mijn gevoel makkelijker met code die tiles kunnen pakken van een tilesheet om er een room mee te bouwen bijvoorbeel.
+
+Ik heb uiteindelijk gekozen voor Unity, omdat ik nog niet eerder met procedural generation heb gewerkt en het wilde leren in een omgeving dat mij op me gemak stelde. En dat doet Unity heel goed.
 
 ## Leerdoelen 
 Wat wil je bereiken met dit project? Formuleer dit kort, krachtig en haalbaar.
-- Het Flood-Fill algoritme snappen en toepassen
-- Het ontwikkelen van een generieke FSM.
-- etc. etc.
+- Een basiskennis opbouwen van procedural generation
+- Meer generieke scripts / classes schrijven
+- 
 
 ## Planning 
-Je hebt grofweg 2 weken, hoe deel je deze twee weken in. Wat plan je wanneer om precies te doen?
+Ik heb niet met een planning gewerkt, maar elke keer doorgewerkt waar ik was gebleven.
 
 | | maandag | dinsdag | woensdag | donderdag | vrijdag |
 | --- | --- | --- | --- | --- | --- |
@@ -30,6 +30,6 @@ Je hebt grofweg 2 weken, hoe deel je deze twee weken in. Wat plan je wanneer om 
 ## Bronnen
 Welke bronnen heb je gebruikt? Zowel youtube filmpjes als artikelen
 
-- [The Guide To Game Design](link)
-- [Alleatoric Algorithms](link)
-- [Flood-Fill Wikipedia](link)
+- [Procedural Generation in Unity (Tutorial)](https://www.youtube.com/watch?v=nADIYwgKHv4)
+- [Procedural World](http://procworld.blogspot.com/2017/06/unity-versus-unreal.html)
+- [Procedural Generation Wikipedia](https://nl.wikipedia.org/wiki/Procedurele_generatie)
