@@ -1206,8 +1206,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 82
+  directionAmount: 4
+  openingDirections: 5400420052004c00
   templates: {fileID: 0}
   spawned: 0
+  roomSize: {x: 10, y: 10}
+  spawnWaitTime: 0.3
 --- !u!114 &114864294301776328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1220,8 +1224,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 76
+  directionAmount: 4
+  openingDirections: 5400420052004c00
   templates: {fileID: 0}
   spawned: 0
+  roomSize: {x: 10, y: 10}
+  spawnWaitTime: 0.3
 --- !u!212 &212027053352328710
 SpriteRenderer:
   m_ObjectHideFlags: 1

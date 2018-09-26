@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// RoomSpawner script that goes on every spawnpoint
+/// </summary>
 public class RoomSpawner : MonoBehaviour {
 
 	public char openingDirection;
@@ -10,85 +13,106 @@ public class RoomSpawner : MonoBehaviour {
 	// R --> right
 	// L --> left
 
+	public int directionAmount = 4;
+	public List<char> openingDirections = new List<char>();
+
 	[SerializeField] private RoomTemplates templates;
-	private int rand;
 	[SerializeField] private bool spawned = false;
+	[SerializeField] private Vector2 roomSize = new Vector2(10f, 10f);
+
+	private float spawnWaitTime;
+	private IEnumerator coroutine;
+	private int rand;
 
 	void Start()
 	{
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-		Log();
-		Invoke("Spawn", 0.1f);
+		spawnWaitTime = templates.roomSpawnTime;
+		openingDirections.Add('T');
+		openingDirections.Add('B');
+		openingDirections.Add('R');
+		openingDirections.Add('L');
+
+		if (!isNextInView(transform.position))
+		{
+			openingDirection = GetOtherOpening(openingDirection, openingDirections);
+		}
+
+		if (!isNextInView(transform.position))
+		{
+			Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+			return;
+		}
+
+		coroutine = Spawn(transform.position, spawnWaitTime, openingDirection);
+		StartCoroutine(coroutine);
 	}
 
-	void Spawn()
+	/// <summary>
+	/// Spawns a random room at this spawnpoint position
+	/// </summary>
+	/// <param name="position"></param>
+	/// <param name="waitTime"></param>
+	/// <param name="currentDirection"></param>
+	/// <returns></returns>
+	IEnumerator Spawn(Vector2 position, float waitTime, char currentDirection)
 	{
-		if (spawned) return;
-		switch (openingDirection)
+		yield return new WaitForSeconds(waitTime);
+
+		if (spawned) yield break;
+
+		switch (currentDirection)
 		{
 			case 'T':
-				// spawn room with top door
+				// spawn room with atleast a top door
 				rand = Random.Range(0, templates.topRooms.Length);
-				Instantiate(templates.topRooms[rand], transform.position, Quaternion.identity);
+				GameObject room = templates.topRooms[rand];
+				Instantiate(room, position, Quaternion.identity);
 				break;
 
 			case 'B':
-				// spawn room with bot door
+				// spawn room with atleast a bot door
 				rand = Random.Range(0, templates.bottomRooms.Length);
-				Instantiate(templates.bottomRooms[rand], transform.position, Quaternion.identity);
+				room = templates.bottomRooms[rand];
+				Instantiate(room, position, Quaternion.identity);
 				break;
 
 			case 'R':
-				// spawn room with right door
+				// spawn room with atleast a right door
 				rand = Random.Range(0, templates.rightRooms.Length);
-				Instantiate(templates.rightRooms[rand], transform.position, Quaternion.identity);
+				room = templates.rightRooms[rand];
+				Instantiate(room, position, Quaternion.identity);
 				break;
 
 			case 'L':
-				// spawn room with left door
+				// spawn room with atleast a left door
 				rand = Random.Range(0, templates.leftRooms.Length);
-				Instantiate(templates.leftRooms[rand], transform.position, Quaternion.identity);
+				room = templates.leftRooms[rand];
+				Instantiate(room, position, Quaternion.identity);
 				break;
 
 			default:
 					print("There was no opening direction given");
 				break;
 		}
-		/*
-		if (openingDirection == 'T')
-		{
-			rand = Random.Range(0, templates.topRooms.Length);
-			Instantiate(templates.topRooms[rand], transform.position, Quaternion.identity);
-		}
-		else if (openingDirection == 'B')
-		{
-			rand = Random.Range(0, templates.bottomRooms.Length);
-			Instantiate(templates.bottomRooms[rand], transform.position, Quaternion.identity);
-		}
-		else if (openingDirection == 'R')
-		{
-			rand = Random.Range(0, templates.rightRooms.Length);
-			Instantiate(templates.rightRooms[rand], transform.position, Quaternion.identity);
-		}
-		else if (openingDirection == 'L')
-		{
-			rand = Random.Range(0, templates.leftRooms.Length);
-			Instantiate(templates.leftRooms[rand], transform.position, Quaternion.identity);
-		}*/
 		spawned = true;
 	}
 
+	/// <summary>
+	/// The trigger ensures that there wont be open exits
+	/// </summary>
+	/// <param name="other"></param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (!other.CompareTag("SpawnPoint")) return;
 
+		if (!other.GetComponent<RoomSpawner>().spawned && !spawned)
+		{
+			Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+			Destroy(gameObject);
+		}
 		try
 		{
-			if (!other.GetComponent<RoomSpawner>().spawned && !spawned)
-			{
-				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-				Destroy(gameObject);
-			}
 		}
 		catch
 		{
@@ -99,10 +123,77 @@ public class RoomSpawner : MonoBehaviour {
 		spawned = true;
 	}
 
-	void Log()
+	/// <summary>
+	/// Checks if the next room will be at the border
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	public bool isNextInView(float x, float y)
 	{
-		Debug.Log(transform.position);
-		Debug.Log(templates);
-		Debug.Log(templates.closedRoom);
+		Vector2 cameraDimensions = new Vector2(0,0);
+		if (x < 0 && y < 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x - roomSize.x, y - roomSize.y));
+		}
+		else if (x < 0 && y > 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x - roomSize.x, y + roomSize.y));
+		}
+		else if (x > 0 && y < 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x + roomSize.x, y - roomSize.y));
+		}
+		else if (x > 0 && y > 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x + roomSize.x, y + roomSize.y));
+		}
+		else if (x < 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x - roomSize.x, y));
+		}
+		else if (x > 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x + roomSize.x, y));
+		}
+		else if (y < 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x, y - roomSize.y));
+		}
+		else if (y > 0)
+		{
+			cameraDimensions = Camera.main.WorldToViewportPoint(new Vector2(x, y + roomSize.y));
+		}
+
+		return (cameraDimensions.x > 0 && cameraDimensions.x < 1 && cameraDimensions.y > 0 && cameraDimensions.y < 1);
 	}
+
+	/// <summary>
+	/// Checks if the next room will be at the border
+	/// </summary>
+	/// <param name="position"></param>
+	/// <returns></returns>
+	public bool isNextInView(Vector2 position)
+	{
+		return (isNextInView(position.x, position.y));
+	}
+
+	/// <summary>
+	/// Get another opening direction if against the border
+	/// </summary>
+	/// <param name="currentOpening"></param>
+	/// <param name="openingDirections"></param>
+	/// <returns></returns>
+	public char GetOtherOpening(char currentOpening, List<char> openingDirections)
+	{
+		char newOpening = openingDirections[Random.Range(0, openingDirections.Count)];
+
+		while (newOpening == currentOpening)
+		{
+			newOpening = openingDirections[Random.Range(0, openingDirections.Count)];
+		}
+
+		return newOpening;
+	}
+	
 }

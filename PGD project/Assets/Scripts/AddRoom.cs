@@ -6,6 +6,9 @@ public class AddRoom : MonoBehaviour {
 
 	RoomTemplates templates;
 
+	/// <summary>
+	/// Adds room to a list to keep track of which rooms are spawned
+	/// </summary>
 	void Start()
 	{
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();

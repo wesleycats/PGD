@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TestHotKeys : MonoBehaviour {
 
-	public KeyCode restart;
+	public KeyCode reset = KeyCode.R;
 
 	void Update () {
-		if (Input.GetKeyDown(restart))
+		if (Input.GetKeyDown(reset))
 		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}

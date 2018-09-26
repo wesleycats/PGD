@@ -13,12 +13,15 @@ public class RoomTemplates : MonoBehaviour {
 	public List<GameObject> rooms = new List<GameObject>();
 	public bool spawnedBoss;
 	public GameObject boss;
+	public float bossSpawnTime = 2f;
+	public float roomSpawnTime = 0.5f;
 
-	public float waitTime;
-
+	/// <summary>
+	/// Spawns endroom with boss after x amount of seconds
+	/// </summary>
 	void Update()
 	{
-		if (waitTime <= 0 && !spawnedBoss)
+		if (bossSpawnTime <= 0 && !spawnedBoss)
 		{
 			for (int i = 0; i < rooms.Count; i++)
 			{
@@ -31,7 +34,7 @@ public class RoomTemplates : MonoBehaviour {
 		}
 		else
 		{
-			waitTime -= Time.deltaTime;
+			bossSpawnTime -= Time.deltaTime;
 		}
 	}
 }
