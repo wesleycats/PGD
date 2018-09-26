@@ -6,7 +6,7 @@ This project is my first attempt to make a procedurally​ ​generated​ ​du
 ## Features
 Wanneer je een specifiek onderdeel wilt uitlichten kun je dat in deze sectie benoemen.
 
-- Geprobeerd zo generiek mogelijk te programmeren [RoomSpawner](https://github.com/wesleycats/PGD/blob/master/PGD%20project/Assets/Scripts/RoomSpawner.cs)
+- [Geprobeerd zo generiek mogelijk te programmeren](https://github.com/wesleycats/PGD/blob/master/PGD%20project/Assets/Scripts/RoomSpawner.cs)
 
 ## Software Anaylse 
 Omdat procedural generation mogelijk is in de meeste bekende engines, maakt het niet echt uit waarin ik te werk zou gaan. Daartentegen zou het wel makkelijk zijn om het in Unity te doen, al was ik met tiles aan de slag gegaan. Ik had voor mijn gevoel makkelijker met code die tiles kunnen pakken van een tilesheet om er een room mee te bouwen bijvoorbeel.
