@@ -17,7 +17,6 @@ Ik heb uiteindelijk gekozen voor Unity, omdat ik nog niet eerder met procedural 
 Wat wil je bereiken met dit project? Formuleer dit kort, krachtig en haalbaar.
 - Een basiskennis opbouwen van procedural generation
 - Meer generieke scripts / classes schrijven
-- 
 
 ## Planning 
 Ik heb niet met een planning gewerkt, maar elke keer doorgewerkt vanaf waar ik was gebleven.
