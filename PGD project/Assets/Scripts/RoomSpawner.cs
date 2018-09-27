@@ -111,15 +111,6 @@ public class RoomSpawner : MonoBehaviour {
 			Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
-		try
-		{
-		}
-		catch
-		{
-			Debug.Log(transform.parent.name + " " + transform.position + " " + other.transform.parent.name + " " + other.transform.position);
-			Debug.Log(templates);
-		}
-		
 		spawned = true;
 	}
 
