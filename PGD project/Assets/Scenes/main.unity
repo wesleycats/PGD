@@ -180,8 +180,8 @@ MonoBehaviour:
   rooms: []
   spawnedBoss: 0
   boss: {fileID: 1576496640214538, guid: e9e79c14d1830e44d98162c72230040a, type: 2}
-  bossSpawnTime: 2
-  roomSpawnTime: 0.2
+  bossSpawnTime: 1
+  roomSpawnTime: 0.1
 --- !u!114 &342733314
 MonoBehaviour:
   m_ObjectHideFlags: 0

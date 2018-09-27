@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TestHotKeys : MonoBehaviour {
-
-	public KeyCode reset = KeyCode.R;
+public class ResetScene : MonoBehaviour {
 
 	void Update () {
-		if (Input.GetKeyDown(reset))
+		if (Input.GetMouseButton(0))
 		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
